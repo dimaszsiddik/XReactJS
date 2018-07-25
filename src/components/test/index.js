@@ -16,7 +16,7 @@ export default class extends React.Component {
         this.state = {
             users: [
                 {
-                    "_id": "5b55a54a6fd1441c08bac91c",
+                    "_id": "1",
                     "userName": "dzs",
                     "name": {
                         "first": "Dimas",
@@ -30,7 +30,7 @@ export default class extends React.Component {
                 },
 
                 {
-                    "_id": "5b55a54a6fd1441c08bac91c",
+                    "_id": "2",
                     "userName": "azs",
                     "name": {
                         "first": "Abdul",
@@ -58,12 +58,29 @@ export default class extends React.Component {
         })
     }
 
+    handleToggle2 = () => {
+        this.setState({
+            updateUser: !this.state.updateUser,
+           
+           
+        })
+    }
+
     handleClose = () => {
         this.setState({
             createNew: !this.state.createNew,
        
         })
     }
+
+    
+    handleClose2 = () => {
+        this.setState({
+            updateUser: !this.state.updateUser,
+       
+        })
+    }
+
     handleEdit = () => {
         console.log('edit')
     }
@@ -84,7 +101,7 @@ export default class extends React.Component {
     handleSubmit = () => {
         const { user } = this.state;
         let newUser = {
-            username : user.userName,
+            userName : user.userName,
             name: {
                 first : user.first,
                 middle : user.middle,
@@ -133,7 +150,7 @@ export default class extends React.Component {
                                     <TableCell >{n.email}</TableCell>
                                     <TableCell >{n.phone}</TableCell>
                                     <TableCell >{n.active}</TableCell>
-                                    <TableCell ><Edit updateUser={this.state.updateUser} handleToggle={this.handleToggle} handleClose={this.handleClose}  handleChange={this.handleChange} user={this.state.user} handleSubmit={this.handleSubmit}/>&nbsp;&nbsp;&nbsp;&nbsp;<IconDelete onClick={()=> this.handleDelete(users.indexOf(n))} color="secondary"/></TableCell>
+                                    <TableCell ><Edit updateUser={this.state.updateUser} handleToggle2={this.handleToggle2} handleClose2={this.handleClose2}  handleChange={this.handleChange} user={this.state.user} handleSubmit={this.handleSubmit}/>&nbsp;&nbsp;&nbsp;&nbsp;<IconDelete onClick={()=> this.handleDelete(users.indexOf(n))} color="secondary"/></TableCell>
                                
                                 </TableRow>
                             );

@@ -8,12 +8,12 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import  TextField  from '@material-ui/core/TextField';
 import IconEdit from '@material-ui/icons/Edit';
 
-export default ({ updateUser, handleToggle, handleClose, handleSubmit, handleChange, user:{userName, first, middle, last, email, phone, active} }) => {
+export default ({ updateUser, handleToggle2, handleClose2,  handleChange, user:{userName, first, middle, last, email, phone, active} }) => {
     return <Fragment>
-        <IconEdit onClick={handleToggle}  color="primary" />
+        <IconEdit onClick={handleToggle2}  color="primary" />
         <Dialog
             open={updateUser}
-            onClose={handleClose}
+            onClose={handleClose2}
         >
             <DialogTitle id="alert-dialog-title">{"Update User"}</DialogTitle>
             <DialogContent>
@@ -38,10 +38,10 @@ export default ({ updateUser, handleToggle, handleClose, handleSubmit, handleCha
                 </form>
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleClose} color="primary">
+                <Button onClick={handleClose2} color="primary">
                     Cancel
             </Button>
-                <Button onClick={handleSubmit} color="primary" autoFocus>
+                <Button color="primary" autoFocus>
                     Save
             </Button>
             </DialogActions>
