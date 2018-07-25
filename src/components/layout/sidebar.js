@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
+import UserIcon from '@material-ui/icons/SupervisorAccount';
 
 import users from '../users';
 
@@ -29,8 +30,8 @@ export default class SideBar extends React.Component {
                     <Divider />
                     <List onClick={() => onSelected()}>
                         <ListItem className={classes.ListItem}><HomeIcon className={classes.MenuIcon} /><Link to="/" className={classes.MenuList}>Home</Link></ListItem>
-                        <ListItem className={classes.ListItem}><HomeIcon className={classes.MenuIcon} /><Link to="/users" className={classes.MenuList}>Users</Link></ListItem>
-                        <ListItem className={classes.ListItem}><HomeIcon className={classes.MenuIcon} /><Link to="/test" className={classes.MenuList}>test</Link></ListItem>
+                        <ListItem className={classes.ListItem}><UserIcon className={classes.MenuIcon} /><Link to="/users" className={classes.MenuList}>Users</Link></ListItem>
+                        <ListItem className={classes.ListItem}><UserIcon className={classes.MenuIcon} /><Link to="/test" className={classes.MenuList}>test</Link></ListItem>
                         <ListItem className={classes.ListItem}><HelpIcon className={classes.MenuIcon} /><Link to="/help" className={classes.MenuList}>Help</Link></ListItem>
                     </List>
                 </Drawer>
