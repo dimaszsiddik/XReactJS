@@ -4,6 +4,8 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import IconEdit from '@material-ui/icons/Edit';
+import IconDelete from '@material-ui/icons/Delete';
 
 import Create from './create';
 
@@ -42,6 +44,7 @@ export default class extends React.Component {
             ],
             createNew: false,
             user:{userName:'', first:'',last:'',middle:'',last:'', phone:'',email:'', active:''},
+            
         }
     }
 
@@ -55,6 +58,9 @@ export default class extends React.Component {
         this.setState({
             createNew: !this.state.createNew
         })
+    }
+    handleEdit = () => {
+        console.log('edit')
     }
 
     handleChange= name => ({target: {value}}) =>{
@@ -79,6 +85,8 @@ export default class extends React.Component {
             phone: user.phone,
             active: user.active
         }
+        
+      
 
         let users = this.state.users;
         users.push(newUser);
@@ -116,6 +124,8 @@ export default class extends React.Component {
                                     <TableCell >{n.email}</TableCell>
                                     <TableCell >{n.phone}</TableCell>
                                     <TableCell >{n.active}</TableCell>
+                                    <TableCell ><IconEdit onClick={()=> this.handleEdit()}/>&nbsp;&nbsp;&nbsp;&nbsp;<IconDelete/></TableCell>
+                               
                                 </TableRow>
                             );
                         })}

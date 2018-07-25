@@ -4,6 +4,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import IconEdit from '@material-ui/icons/Edit';
 
 import Create from './create';
 
@@ -116,6 +117,7 @@ export default class extends React.Component {
                                     <TableCell >{n.email}</TableCell>
                                     <TableCell >{n.phone}</TableCell>
                                     <TableCell >{n.active}</TableCell>
+                                    <TableCell ><IconEdit/></TableCell>
                                 </TableRow>
                             );
                         })}
