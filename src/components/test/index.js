@@ -4,10 +4,11 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import IconEdit from '@material-ui/icons/Edit';
+
 import IconDelete from '@material-ui/icons/Delete';
 
 import Create from './create';
+import Edit from './edit';
 
 export default class extends React.Component {
     constructor(props) {
@@ -43,24 +44,32 @@ export default class extends React.Component {
                 }
             ],
             createNew: false,
-            user:{userName:'', first:'',last:'',middle:'',last:'', phone:'',email:'', active:''},
-            
+         
+            user:{userName:'', first:'',last:'',middle:'',last:'', phone:'',email:'', active:''}
+           
         }
     }
 
     handleToggle = () => {
         this.setState({
-            createNew: !this.state.createNew
+            createNew: !this.state.createNew,
+           
+           
         })
     }
 
     handleClose = () => {
         this.setState({
-            createNew: !this.state.createNew
+            createNew: !this.state.createNew,
+       
         })
     }
     handleEdit = () => {
         console.log('edit')
+    }
+    handleDelete =(n) => {
+        this.state.users.splice(n,1);
+        this.setState(this.state.users);
     }
 
     handleChange= name => ({target: {value}}) =>{
@@ -124,7 +133,7 @@ export default class extends React.Component {
                                     <TableCell >{n.email}</TableCell>
                                     <TableCell >{n.phone}</TableCell>
                                     <TableCell >{n.active}</TableCell>
-                                    <TableCell ><IconEdit onClick={()=> this.handleEdit()}/>&nbsp;&nbsp;&nbsp;&nbsp;<IconDelete/></TableCell>
+                                    <TableCell ><Edit updateUser={this.state.updateUser} handleToggle={this.handleToggle} handleClose={this.handleClose}  handleChange={this.handleChange} user={this.state.user} handleSubmit={this.handleSubmit}/>&nbsp;&nbsp;&nbsp;&nbsp;<IconDelete onClick={()=> this.handleDelete(users.indexOf(n))} color="secondary"/></TableCell>
                                
                                 </TableRow>
                             );
