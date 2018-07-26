@@ -12,7 +12,9 @@ import IconEdit from '@material-ui/icons/ModeEdit';
 import Checkbox from '@material-ui/core/Checkbox';
 
 
-import CreateCategory from './create'
+import CreateCategory from './create';
+import EditCategory from './edit';
+import DeleteCategory from './delete';
 
 import { config } from '../configurations/config';
 import axios from 'axios';
@@ -20,7 +22,7 @@ import axios from 'axios';
 class Categories extends React.Component {
 
     categoryModel = {
-        _id: '', initial: '', name: '',  active: true
+        _id: '', initial: '', name: '', active: true
     }
     constructor(props) {
         super(props);
@@ -35,23 +37,26 @@ class Categories extends React.Component {
 
     reloadCategoriesData = () => {
         axios.get(config.url + '/categories')
-        .then(res => {
-            this.setState({
-                categories: res.data,
-                category: this.categoryModel,
-                load: false
+            .then(res => {
+                this.setState({
+                    categories: res.data,
+                    category: this.categoryModel,
+                    createNew: false,
+                    editCategory: false,
+                    deleteCategory: false,
+                    load: false
+                })
+
             })
-         
-        })
-        .catch((error) => {
-            alert(error);
-        })
+            .catch((error) => {
+                alert(error);
+            })
     }
 
     componentDidMount() {
         this.reloadCategoriesData();
     }
-    
+
     handleChange = name => ({ target: { value } }) => {
         this.setState({
             category: {
@@ -61,7 +66,7 @@ class Categories extends React.Component {
         })
     }
 
-    handleChangeCheckBox = name => event =>{
+    handleChangeCheckBox = name => event => {
         this.setState({
             category: {
                 ...this.state.category,
@@ -80,20 +85,88 @@ class Categories extends React.Component {
     handleClose = () => {
         this.setState({
             createNew: false,
+            editCategory: false,
+            deleteCategory: false,
             category: this.categoryModel
 
         })
     }
 
-    handelSubmit = () => {
+    handleSubmit = () => {
         const { category, createNew } = this.state;
 
         let newCategory = {
             initial: category.initial,
             name: category.name,
-            active:category.active
+            active: category.active
         }
 
+        if (createNew) {
+            axios.post(config.url + '/categories', newCategory)
+                .then(res => {
+                    this.reloadCategoriesData();
+                    alert('has been saved');
+                })
+                .catch((error) => {
+                    alert(error);
+                })
+        } else {
+            axios.put(config.url + '/categories/' + category._id, newCategory)
+                .then(res => {
+                    this.reloadCategoriesData();
+                    alert('has been update');
+                })
+                .catch((error) => {
+                    alert(error);
+                })
+        }
+
+    }
+
+    handleEdit = (_id) => {
+
+        const { categories } = this.state;
+        const category = categories.find(u => u._id === _id);
+
+        this.setState({
+            editCategory: true,
+            category: {
+                _id: category._id,
+                initial: category.initial,
+                name: category.name,
+
+                active: category.active
+            }
+        })
+    }
+
+    handleDelete = (_id) => {
+
+        const { categories } = this.state;
+        const category = categories.find(u => u._id === _id);
+
+        this.setState({
+            deleteCategory: true,
+            category: {
+                _id: category._id,
+                initial: category.initial,
+                name: category.name,
+                active: category.active
+            }
+        })
+    }  
+    
+    handleDeleteConfirm = () => {
+        const { category } = this.state;
+        axios.delete(config.url + '/categories/' + category._id)
+        .then(res =>{
+            this.reloadCategoriesData();
+            alert('has been deleted');
+        })
+        .catch((error) => {
+            alert(error);
+        })
+        
     }
 
     render() {
@@ -104,8 +177,12 @@ class Categories extends React.Component {
         return (
             <div>
                 <h3>List Of Categories</h3>
-                <CreateCategory createNew={this.state.createNew} category={this.state.category}  handleToggle={this.handleToggle} handleClose={this.handleClose} handleChange={this.handleChange} handleChangeCheckBox={this.handleChangeCheckBox}  />
-               
+                <CreateCategory createNew={this.state.createNew} category={this.state.category} handleToggle={this.handleToggle} handleClose={this.handleClose} handleChange={this.handleChange} handleChangeCheckBox={this.handleChangeCheckBox} handleSubmit={this.handleSubmit} />
+
+
+                <EditCategory editCategory={this.state.editCategory} handleToggle={this.handleToggle} handleClose={this.handleClose} handleChange={this.handleChange} handleChangeCheckBox={this.handleChangeCheckBox} category={this.state.category} handleSubmit={this.handleSubmit} />
+
+                 <DeleteCategory deleteCategory={this.state.deleteCategory}  handleClose={this.handleClose}   category={this.state.category} handleDeleteConfirm={this.handleDeleteConfirm}  />
 
                 <CircularProgress className={classes.progress} style={{ visibility: (load ? 'visible' : 'hidden') }} color="secondary" />
 
@@ -114,7 +191,7 @@ class Categories extends React.Component {
                         <TableRow>
                             <TableCell>Initial</TableCell>
                             <TableCell >Name</TableCell>
-                            
+
                             <TableCell >Active </TableCell>
 
                         </TableRow>
@@ -127,8 +204,8 @@ class Categories extends React.Component {
                                     <TableCell >{n.name}</TableCell>
                                     <TableCell ><Checkbox checked={n.active} value="active" /></TableCell>
                                     <TableCell >
-                                        <IconEdit  variant="contained" color="primary" >Edit</IconEdit>
-                                        <IconDelete  variant="contained" color="secondary" >Delete</IconDelete>
+                                        <IconEdit onClick={() => this.handleEdit(n._id)} variant="contained" color="primary" >Edit</IconEdit>
+                                        <IconDelete onClick={() => this.handleDelete(n._id)} variant="contained" color="secondary" >Delete</IconDelete>
                                     </TableCell>
 
                                 </TableRow>
