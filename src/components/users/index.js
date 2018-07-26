@@ -144,8 +144,6 @@ class Users extends React.Component {
                 .catch((error) => {
                     alert(error);
                 })
-            // let idx = users.findIndex(u => u._id === newUser._id);
-            // users[idx] = newUser;
         }
 
     }

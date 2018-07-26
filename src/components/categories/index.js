@@ -85,7 +85,16 @@ class Categories extends React.Component {
         })
     }
 
-    
+    handelSubmit = () => {
+        const { category, createNew } = this.state;
+
+        let newCategory = {
+            initial: category.initial,
+            name: category.name,
+            active:category.active
+        }
+
+    }
 
     render() {
 
