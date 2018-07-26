@@ -9,10 +9,10 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import IconDelete from '@material-ui/icons/Delete';
 import IconEdit from '@material-ui/icons/ModeEdit';
+import Checkbox from '@material-ui/core/Checkbox';
 
 
-
-
+import CreateCategory from './create'
 
 import { config } from '../configurations/config';
 import axios from 'axios';
@@ -27,7 +27,6 @@ class Categories extends React.Component {
         this.state = {
             categories: [],
             createNew: false,
-            
             load: true,
             category: {}
 
@@ -52,6 +51,42 @@ class Categories extends React.Component {
     componentDidMount() {
         this.reloadCategoriesData();
     }
+    
+    handleChange = name => ({ target: { value } }) => {
+        this.setState({
+            category: {
+                ...this.state.category,
+                [name]: value
+            }
+        })
+    }
+
+    handleChangeCheckBox = name => event =>{
+        this.setState({
+            category: {
+                ...this.state.category,
+                [name]: event.target.checked
+            }
+        })
+    }
+
+    handleToggle = () => {
+        this.setState({
+            createNew: !this.state.createNew,
+            category: this.categoryModel
+
+        })
+    }
+    handleClose = () => {
+        this.setState({
+            createNew: false,
+            category: this.categoryModel
+
+        })
+    }
+
+    
+
     render() {
 
         const { categories, load } = this.state;
@@ -60,6 +95,7 @@ class Categories extends React.Component {
         return (
             <div>
                 <h3>List Of Categories</h3>
+                <CreateCategory createNew={this.state.createNew} category={this.state.category}  handleToggle={this.handleToggle} handleClose={this.handleClose} handleChange={this.handleChange} handleChangeCheckBox={this.handleChangeCheckBox}  />
                
 
                 <CircularProgress className={classes.progress} style={{ visibility: (load ? 'visible' : 'hidden') }} color="secondary" />
@@ -80,7 +116,7 @@ class Categories extends React.Component {
                                 <TableRow key={n._id}>
                                     <TableCell component="th" scope="row">  {n.initial} </TableCell>
                                     <TableCell >{n.name}</TableCell>
-                                    <TableCell >{n.active}</TableCell>
+                                    <TableCell ><Checkbox checked={n.active} value="active" /></TableCell>
                                     <TableCell >
                                         <IconEdit  variant="contained" color="primary" >Edit</IconEdit>
                                         <IconDelete  variant="contained" color="secondary" >Delete</IconDelete>
