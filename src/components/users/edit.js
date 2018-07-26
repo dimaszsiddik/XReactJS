@@ -6,18 +6,21 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import  TextField  from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 
-export default ({ createNew, handleToggle, handleClose, handleSubmit, handleChange, user:{userName, first, middle, last, email, phone, active} }) => {
+
+export default ({ editUser, handleClose, handleSubmit, handleChange,handleChangeCheckBox, user:{userName, first, middle, last, email, phone, active} }) => {
     return <Fragment>
-        <Button onClick={handleToggle} variant="contained" color="primary" >Create</Button>
+
         <Dialog
-            open={createNew}
+            open={editUser}
             onClose={handleClose}
         >
-            <DialogTitle id="alert-dialog-title">{"New User"}</DialogTitle>
+            <DialogTitle id="alert-dialog-title">{"Update User"}</DialogTitle>
             <DialogContent>
                 <DialogContentText id="alert-dialog-description">
-                    Please fill out the form below
+                    Update this User
             </DialogContentText>
                 <form>
                     <TextField label="Username" value ={userName} onChange={handleChange('userName')} margin='normal'/>
@@ -32,7 +35,17 @@ export default ({ createNew, handleToggle, handleClose, handleSubmit, handleChan
                     &nbsp;
                     <TextField label="email" value ={email}  onChange={handleChange('email')} margin='normal'/>
                     <br/>
-                    <TextField label="Active" value ={active}  onChange={handleChange('active')} margin='normal'/>
+                    <FormControlLabel
+                        control={
+                            <Switch
+                                checked={active}
+                                onChange={handleChangeCheckBox('active')}
+                                value="active"
+                                color="primary"
+                            />
+                        }
+                        label="Active"
+                    />
                     <br/>
                 </form>
             </DialogContent>
@@ -40,7 +53,7 @@ export default ({ createNew, handleToggle, handleClose, handleSubmit, handleChan
                 <Button onClick={handleClose} color="primary">
                     Cancel
             </Button>
-                <Button onClick={handleSubmit} color="primary" autoFocus>
+                <Button  onClick={handleSubmit} color="primary" autoFocus>
                     Save
             </Button>
             </DialogActions>

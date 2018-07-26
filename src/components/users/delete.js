@@ -6,6 +6,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import  TextField  from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 
 export default ({ deleteUser, handleClose, handleDeleteConfirm, user:{userName, first, middle, last, email, phone, active} }) => {
     return <Fragment>
@@ -32,7 +34,17 @@ export default ({ deleteUser, handleClose, handleDeleteConfirm, user:{userName, 
                     &nbsp;
                     <TextField label="email" value ={email}   margin='normal' disabled={true}/>
                     <br/>
-                    <TextField label="Active" value ={active}   margin='normal' disabled={true}/>
+                    <FormControlLabel
+                        control={
+                            <Switch
+                                checked={active}
+                                value="active"
+                                color="primary"
+                            />
+                        }
+                        disabled
+                        label="Active"
+                    />
                     <br/>
                 </form>
             </DialogContent>
