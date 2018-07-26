@@ -10,6 +10,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import UserIcon from '@material-ui/icons/SupervisorAccount';
+import CategoryIcon from '@material-ui/icons/CreditCard';
 
 import categories from '../categories';
 import users from '../users';
@@ -31,7 +32,7 @@ export default class SideBar extends React.Component {
                     <List onClick={() => onSelected()}>
                         <ListItem className={classes.ListItem}><HomeIcon className={classes.MenuIcon} /><Link to="/" className={classes.MenuList}>Home</Link></ListItem>
                         <ListItem className={classes.ListItem}><UserIcon className={classes.MenuIcon} /><Link to="/users" className={classes.MenuList}>Users</Link></ListItem>
-                        <ListItem className={classes.ListItem}><UserIcon className={classes.MenuIcon} /><Link to="/categories" className={classes.MenuList}>Categories</Link></ListItem>
+                        <ListItem className={classes.ListItem}><CategoryIcon className={classes.MenuIcon} /><Link to="/categories" className={classes.MenuList}>Categories</Link></ListItem>
                         <ListItem className={classes.ListItem}><HelpIcon className={classes.MenuIcon} /><Link to="/help" className={classes.MenuList}>Help</Link></ListItem>
                     </List>
                 </Drawer>
