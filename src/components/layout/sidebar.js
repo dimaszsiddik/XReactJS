@@ -14,6 +14,7 @@ import CategoryIcon from '@material-ui/icons/CreditCard';
 
 import categories from '../categories';
 import users from '../users';
+import tables from '../tables';
 
 
 export default class SideBar extends React.Component {
@@ -32,12 +33,14 @@ export default class SideBar extends React.Component {
                     <List onClick={() => onSelected()}>
                         <ListItem className={classes.ListItem}><HomeIcon className={classes.MenuIcon} /><Link to="/" className={classes.MenuList}>Home</Link></ListItem>
                         <ListItem className={classes.ListItem}><UserIcon className={classes.MenuIcon} /><Link to="/users" className={classes.MenuList}>Users</Link></ListItem>
+                        <ListItem className={classes.ListItem}><UserIcon className={classes.MenuIcon} /><Link to="/tables" className={classes.MenuList}>Tables</Link></ListItem>
                         <ListItem className={classes.ListItem}><CategoryIcon className={classes.MenuIcon} /><Link to="/categories" className={classes.MenuList}>Categories</Link></ListItem>
                         <ListItem className={classes.ListItem}><HelpIcon className={classes.MenuIcon} /><Link to="/help" className={classes.MenuList}>Help</Link></ListItem>
                     </List>
                 </Drawer>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/users" component={users} />
+                <Route exact path="/tables" component={tables} />
                 <Route exact path="/categories" component={categories} />
                 <Route exact path="/help" component={Help} />
             </div>
