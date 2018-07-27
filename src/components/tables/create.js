@@ -9,7 +9,7 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 
-export default ({ createNew, handleToggle, handleClose, handleSubmit,handleChangeCheckBox, handleChange,  tables: { seat, description, active }}) => {
+export default ({ createNew, handleToggle, handleClose, handleSubmit, handleChangeCheckBox, handleChange, table: { seat, description, active } }) => {
     return <Fragment>
         <Button onClick={handleToggle} variant="contained" color="primary" >Create</Button>
         <Dialog
@@ -22,11 +22,14 @@ export default ({ createNew, handleToggle, handleClose, handleSubmit,handleChang
                     Please fill out the form below
             </DialogContentText>
                 <form>
-                    <TextField label="Initial" value={seat} onChange={handleChange('seat')} margin='normal' />
+                    <TextField label="Seat" type="number" InputLabelProps={{
+                        shrink: true,
+                    }}
+                        value={seat} onChange={handleChange('seat')} margin='normal' />
                     &nbsp;
-                    <TextField label="Name" value={description} onChange={handleChange('descrption')} margin='normal' />
+                    <TextField label="Description" value={description} onChange={handleChange('descrption')} margin='normal' />
                     <br />
-                    
+
                     {/* <TextField label="Active" value ={active}  onChange={handleChange('active')} margin='normal'/> */}
                     <FormControlLabel
                         control={

@@ -12,85 +12,85 @@ import IconEdit from '@material-ui/icons/ModeEdit';
 import Checkbox from '@material-ui/core/Checkbox';
 
 
-import CreateTable from './create';
+// import CreateCategory from './create';
 // import EditCategory from './edit';
 // import DeleteCategory from './delete';
 
 import { config } from '../configurations/config';
 import axios from 'axios';
 
-class Tables extends React.Component {
+class Products extends React.Component {
 
-    tablesModel = {
-        _id: '', seat: '', descripton: '', active: true
+    productModel = {
+        _id: '', initial: '', name: '', price:'', active: true, categoryId: ''
     }
     constructor(props) {
         super(props);
         this.state = {
-            tables: [],
+            // categories: [],
             createNew: false,
             load: true,
-            table: {}
+            // category: {}
 
         }
     }
 
-    reloadTablesData = () => {
-        axios.get(config.url + '/tables')
-            .then(res => {
-                this.setState({
-                    tables: res.data,
-                    table: this.tablesModel,
-                    createNew: false,
-                    // editCategory: false,
-                    // deleteCategory: false,
-                    load: false
-                })
+    // reloadCategoriesData = () => {
+    //     axios.get(config.url + '/categories')
+    //         .then(res => {
+    //             this.setState({
+    //                 categories: res.data,
+    //                 category: this.categoryModel,
+    //                 createNew: false,
+    //                 editCategory: false,
+    //                 deleteCategory: false,
+    //                 load: false
+    //             })
 
-            })
-            .catch((error) => {
-                alert(error);
-            })
-    }
+    //         })
+    //         .catch((error) => {
+    //             alert(error);
+    //         })
+    // }
 
-    componentDidMount() {
-        this.reloadTablesData();
-    }
+    // componentDidMount() {
+    //     this.reloadCategoriesData();
+    // }
 
-    handleChange = name => ({ target: { value } }) => {
-        this.setState({
-            table: {
-                ...this.state.category,
-                [name]: value
-            }
-        })
-    }
+    // handleChange = name => ({ target: { value } }) => {
+    //     this.setState({
+    //         category: {
+    //             ...this.state.category,
+    //             [name]: value
+    //         }
+    //     })
+    // }
 
-    handleChangeCheckBox = name => event => {
-        this.setState({
-            table: {
-                ...this.state.category,
-                [name]: event.target.checked
-            }
-        })
-    }
+    // handleChangeCheckBox = name => event => {
+    //     this.setState({
+    //         category: {
+    //             ...this.state.category,
+    //             [name]: event.target.checked
+    //         }
+    //     })
+    // }
 
-    handleToggle = () => {
-        this.setState({
-            createNew: !this.state.createNew,
-            table: this.tablesModel
+    // handleToggle = () => {
+    //     this.setState({
+    //         createNew: !this.state.createNew,
+    //         category: this.categoryModel
 
-        })
-    }
-    handleClose = () => {
-        this.setState({
-            createNew: false,
-            // editCategory: false,
-            // deleteCategory: false,
-            table: this.tablesModel
+    //     })
+    // }
+    // handleClose = () => {
+    //     this.setState({
+    //         createNew: false,
+    //         editCategory: false,
+    //         deleteCategory: false,
+    //         category: this.categoryModel
 
-        })
-    }
+    //     })
+    // }
 
     // handleSubmit = () => {
     //     const { category, createNew } = this.state;
@@ -171,13 +171,13 @@ class Tables extends React.Component {
 
     render() {
 
-        const { tables, load } = this.state;
+        const { categories, load } = this.state;
         const { classes } = this.props;
 
         return (
             <div>
-                <h3>List Of Tables</h3>
-                <CreateTable createNew={this.state.createNew} table={this.state.table} handleToggle={this.handleToggle} handleClose={this.handleClose} handleChange={this.handleChange} handleChangeCheckBox={this.handleChangeCheckBox}  />
+                <h3>List Of Products</h3>
+                {/* <CreateCategory createNew={this.state.createNew} category={this.state.category} handleToggle={this.handleToggle} handleClose={this.handleClose} handleChange={this.handleChange} handleChangeCheckBox={this.handleChangeCheckBox} handleSubmit={this.handleSubmit} /> */}
 
 
                 {/* <EditCategory editCategory={this.state.editCategory} handleToggle={this.handleToggle} handleClose={this.handleClose} handleChange={this.handleChange} handleChangeCheckBox={this.handleChangeCheckBox} category={this.state.category} handleSubmit={this.handleSubmit} /> */}
@@ -189,28 +189,29 @@ class Tables extends React.Component {
                 <Table >
                     <TableHead>
                         <TableRow>
-                            <TableCell>Seat</TableCell>
-                            <TableCell >Description</TableCell>
-
+                            <TableCell>Initial</TableCell>
+                            <TableCell >Name</TableCell>
+                            <TableCell >Price</TableCell>
+                            <TableCell >Category Id </TableCell>
                             <TableCell >Active </TableCell>
 
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {tables.map(n => {
+                        {/* {categories.map(n => {
                             return (
                                 <TableRow key={n._id}>
-                                    <TableCell component="th" scope="row">  {n.seat} </TableCell>
-                                    <TableCell >{n.description}</TableCell>
+                                    <TableCell component="th" scope="row">  {n.initial} </TableCell>
+                                    <TableCell >{n.name}</TableCell>
                                     <TableCell ><Checkbox checked={n.active} value="active" /></TableCell>
                                     <TableCell >
-                                        {/* <IconEdit onClick={() => this.handleEdit(n._id)} variant="contained" color="primary" >Edit</IconEdit>
-                                        <IconDelete onClick={() => this.handleDelete(n._id)} variant="contained" color="secondary" >Delete</IconDelete> */}
+                                        <IconEdit onClick={() => this.handleEdit(n._id)} variant="contained" color="primary" >Edit</IconEdit>
+                                        <IconDelete onClick={() => this.handleDelete(n._id)} variant="contained" color="secondary" >Delete</IconDelete>
                                     </TableCell>
 
                                 </TableRow>
                             );
-                        })}
+                        })} */}
                     </TableBody>
                 </Table>
             </div>
@@ -227,8 +228,8 @@ const styles = theme => ({
         alignItem: 'center',
     },
 });
-Tables.propTypes = {
+Products.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Tables);
+export default withStyles(styles)(Products);
